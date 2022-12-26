@@ -9,7 +9,24 @@ const scene = new THREE.Scene()
 let galaxy = Galaxy()
 scene.add(galaxy)
 
-debug(scene, galaxy)
+function create() {
+    if (galaxy) {
+        destroy(galaxy)
+        scene.remove(galaxy)
+    }
+    galaxy = Galaxy()
+    scene.add(galaxy)
+}
+
+gui.add(params, 'count').min(100).max(1000000).step(100).onFinishChange(create)
+gui.add(params, 'size').min(0.001).max(0.1).step(0.001).onFinishChange(create)
+gui.add(params, 'radius').min(0.01).max(20).step(0.01).onFinishChange(create)
+gui.add(params, 'branches').min(2).max(20).step(1).onFinishChange(create)
+gui.add(params, 'spin').min(-5).max(5).step(0.001).onFinishChange(create)
+gui.add(params, 'randomness').min(0).max(2).step(0.001).onFinishChange(create)
+gui.add(params, 'randomnessPower').min(1.2).max(10).step(0.001).onFinishChange(create)
+gui.addColor(params, 'insideColor').onFinishChange(create)
+gui.addColor(params, 'outsideColor').onFinishChange(create)
 
 const sizes = {
     width: window.innerWidth,

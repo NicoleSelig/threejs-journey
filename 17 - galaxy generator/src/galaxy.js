@@ -84,22 +84,12 @@ export function Galaxy(options = {}) {
         return points
 }
 
-export function create(galaxy, scene) {
-    if (galaxy) {
-        destroy(galaxy)
-        scene.remove(galaxy)
-    }
-    galaxy = Galaxy()
-    scene.add(galaxy)
-}
-
 export function destroy(galaxy) {
     galaxy.material.dispose()
     galaxy.geometry.dispose()
 }
 
-export function debug(scene, galaxy) {
-    create(galaxy, scene)
+export function debug(create) {
     gui.add(params, 'count').min(100).max(1000000).step(100).onFinishChange(create)
     gui.add(params, 'size').min(0.001).max(0.1).step(0.001).onFinishChange(create)
     gui.add(params, 'radius').min(0.01).max(20).step(0.01).onFinishChange(create)
